@@ -12,10 +12,12 @@ spec:
         component: mycompany-monolith
     spec:
       containers:
-        - name: zeppelin
+        - name: mycompany-monolith
           image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services
           ports:
             - containerPort: 8080
           resources:
+            limits:
+              cpu: "1"
             requests:
-              cpu: 100m
+              cpu: "1"
