@@ -3,7 +3,7 @@ apiVersion: v1
 metadata:
   name: mycompany-monolith-contr
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     component: mycompany-monolith
   template:
