@@ -1,0 +1,28 @@
+2017-11-24 07:12:32,223 INFO o.a.j.u.JMeterUtils: Setting Locale to en_US
+2017-11-24 07:12:32,243 INFO o.a.j.JMeter: Loading user properties from: /opt/apache-jmeter-3.3/bin/user.properties
+2017-11-24 07:12:32,244 INFO o.a.j.JMeter: Loading system properties from: /opt/apache-jmeter-3.3/bin/system.properties
+2017-11-24 07:12:32,245 INFO o.a.j.JMeter: Setting System property: server_port=1099
+2017-11-24 07:12:32,245 INFO o.a.j.JMeter: Setting System property: server.rmi.localport=4000
+2017-11-24 07:12:32,252 INFO o.a.j.JMeter: Copyright (c) 1998-2017 The Apache Software Foundation
+2017-11-24 07:12:32,253 INFO o.a.j.JMeter: Version 3.3 r1808647
+2017-11-24 07:12:32,253 INFO o.a.j.JMeter: java.version=1.8.0_121
+2017-11-24 07:12:32,254 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2017-11-24 07:12:32,254 INFO o.a.j.JMeter: os.name=Linux
+2017-11-24 07:12:32,255 INFO o.a.j.JMeter: os.arch=amd64
+2017-11-24 07:12:32,255 INFO o.a.j.JMeter: os.version=4.9.49-moby
+2017-11-24 07:12:32,255 INFO o.a.j.JMeter: file.encoding=UTF-8
+2017-11-24 07:12:32,256 INFO o.a.j.JMeter: Max memory     =1400897536
+2017-11-24 07:12:32,256 INFO o.a.j.JMeter: Available Processors =2
+2017-11-24 07:12:32,263 INFO o.a.j.JMeter: Default Locale=English (United States)
+2017-11-24 07:12:32,264 INFO o.a.j.JMeter: JMeter  Locale=English (United States)
+2017-11-24 07:12:32,265 INFO o.a.j.JMeter: JMeterHome=/opt/apache-jmeter-3.3
+2017-11-24 07:12:32,265 INFO o.a.j.JMeter: user.dir  =/Users/Evrim/git/microservices-latency-analysis/kubernetes-jmeter-server
+2017-11-24 07:12:32,267 INFO o.a.j.JMeter: PWD       =/Users/Evrim/git/microservices-latency-analysis/kubernetes-jmeter-server
+2017-11-24 07:12:32,267 INFO o.a.j.JMeter: IP: 172.17.0.2 Name: dc68be701fb9 FullName: dc68be701fb9
+2017-11-24 07:12:32,342 INFO o.a.j.e.RemoteJMeterEngineImpl: Starting backing engine on 1099
+2017-11-24 07:12:32,344 INFO o.a.j.e.RemoteJMeterEngineImpl: System property 'java.rmi.server.hostname' is not defined, using localHost address
+2017-11-24 07:12:32,345 INFO o.a.j.e.RemoteJMeterEngineImpl: Local IP address=172.17.0.2
+2017-11-24 07:12:32,346 INFO o.a.j.e.RemoteJMeterEngineImpl: IP address is a site-local address; this may cause problems with remote access.
+	Can be overridden by defining the system property 'java.rmi.server.hostname' - see jmeter-server script file
+2017-11-24 07:12:32,349 INFO o.a.j.e.RemoteJMeterEngineImpl: Creating RMI registry (server.rmi.create=true)
+2017-11-24 07:12:32,356 INFO o.a.j.e.RemoteJMeterEngineImpl: Bound to registry on port 1099
