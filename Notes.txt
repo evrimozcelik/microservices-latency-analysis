@@ -1,0 +1,38 @@
+
+
+curl -H "Content-Type: application/json" -X POST -d '{"reqId":"request1","serviceConfig":{"ServiceB":{"fibonacci":30},"ServiceA":{"responseSize":10}}}' http://localhost:8080/ServiceA
+
+
+MASTER
+
+  JMeter command
+  ./bin/jmeter.sh -Dsun.rmi.log.debug=true   -Dsun.rmi.server.exceptionTrace=true      -Dsun.rmi.loader.logLevel=verbose -Dsun.rmi.dgc.logLevel=verbose -Dsun.rmi.transport.logLevel=verbose -Dsun.rmi.transport.tcp.logLevel=verbose  -Dserver.rmi.localhostname=91.93.246.133 -Djava.rmi.server.hostname=91.93.246.133
+
+
+  ssh -L 24001:127.0.0.1:24001 \
+  -R 25000:127.0.0.1:25000 \
+  -L 26001:127.0.0.1:26001 -N -f USERNAME@SLAVE01
+
+  ssh -L 31099:127.0.0.1:31099 -N -f root@169.51.15.131
+
+  jmeter.propoerties
+    +remote_hosts=127.0.0.1:24001, 127.0.0.1:24002
+    +client.rmi.localport=25000 --> RMI receive results
+    mode=Statistical
+
+SLAVE
+  jmeter.propoerties
+    +server_port=24001 -> JMETER
+    server.rmi.localhostname=127.0.0.1
+    +server.rmi.localport=26001 --> RMI exec method
+
+    +export JVM_ARGS="-Djava.rmi.server.hostname=localhost"
+
+
+  --------
+
+  args:
+    - '-Dserver.rmi.localport=32000 -Djava.rmi.server.hostname=169.51.15.131'
+  env:
+    - name: "SERVER_PORT"
+      value: "31099"
