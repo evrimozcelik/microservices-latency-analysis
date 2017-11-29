@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: mycompany-monolith-deployment
+  name: mycompany-monolith
 spec:
   replicas: 1
   template:
@@ -10,7 +10,7 @@ spec:
         run: mycompany-monolith
     spec:
       containers:
-        - name: mycompany-monolith-container
+        - name: mycompany-monolith
           image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services
           imagePullPolicy: Always
           ports:

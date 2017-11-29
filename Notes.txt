@@ -2,6 +2,8 @@
 
 curl -H "Content-Type: application/json" -X POST -d '{"reqId":"request1","serviceConfig":{"ServiceB":{"fibonacci":30},"ServiceA":{"responseSize":10}}}' http://localhost:8080/ServiceA
 
+/opt/apache-jmeter-3.3
+./bin/jmeter.sh -n -t /tmp/jmeter-script/sample.jmx -l /tmp/jmeter-report/log.jtl
 
 MASTER
 
