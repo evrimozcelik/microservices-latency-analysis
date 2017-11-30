@@ -4,6 +4,7 @@ public class ServiceConfig {
 	
 	private Integer fibonacci;
 	private Integer responseSize;
+	
 	public Integer getFibonacci() {
 		return fibonacci;
 	}
@@ -17,6 +18,4 @@ public class ServiceConfig {
 		this.responseSize = responseSize;
 	}
 	
-	
-
 }
