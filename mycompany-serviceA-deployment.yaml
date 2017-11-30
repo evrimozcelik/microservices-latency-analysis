@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mycompany-serviceA
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: mycompany-serviceA
+    spec:
+      containers:
+        - name: mycompany-serviceA
+          image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          args:
+            - '-Dspring.profiles.active=microservices'
+          resources:
+            requests:
+              cpu: "150m"
+            limits:
+              cpu: "150m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mycompany-serviceA-service
+  labels:
+    run: mycompany-monolith
+spec:
+  type: NodePort
+  selector:
+    run: mycompany-monolith
+  ports:
+   - name: "service"
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+     nodePort: 30081

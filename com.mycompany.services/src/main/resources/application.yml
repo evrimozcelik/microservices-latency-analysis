@@ -1,0 +1,26 @@
+
+---
+# Default settings
+
+microservicesMode: false
+
+ServiceB:
+  ribbon:
+    listOfServers: localhost:8080
+ServiceD:
+  ribbon:
+    listOfServers: localhost:8080
+---
+
+spring:
+  profiles: microservices
+  
+microservicesMode: true
+
+ServiceB:
+  ribbon:
+    listOfServers: mycompany-serviceB:8080
+ServiceD:
+  ribbon:
+    listOfServers: mycompany-serviceD:8080
+ 

@@ -10,8 +10,8 @@ import com.mycompany.data.ServiceResponse;
 @RestController
 public class ServiceD extends AbstractService{
 	
-	private int fibonacci = 42;
-	private int responseSize = 1000;
+	private int fibonacci = 30;
+	private int responseSize = 100;
 	
 	@PostMapping("/ServiceD")
 	public ServiceResponse doService(@RequestBody ServiceRequest request) {

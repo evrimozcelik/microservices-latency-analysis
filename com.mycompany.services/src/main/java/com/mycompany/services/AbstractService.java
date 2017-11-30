@@ -3,6 +3,8 @@ package com.mycompany.services;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.airline.util.Fibonacci;
 import com.mycompany.data.ResponseItem;
 import com.mycompany.data.ServiceConfig;
@@ -10,6 +12,8 @@ import com.mycompany.data.ServiceRequest;
 import com.mycompany.data.ServiceResponse;
 
 abstract public class AbstractService {
+	
+	@Value("${microservicesMode}") private boolean microservicesMode;
 
 	public ServiceResponse process(ServiceRequest request, int fibonacci, int responseSize) {
 		String serviceName = this.getClass().getSimpleName();
@@ -47,4 +51,9 @@ abstract public class AbstractService {
 		
 		return response;
 	}
+
+	public boolean isMicroservicesMode() {
+		return microservicesMode;
+	}
+	
 }
