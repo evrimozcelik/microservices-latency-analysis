@@ -3,6 +3,8 @@ package com.mycompany.services;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.airline.util.Fibonacci;
@@ -14,9 +16,13 @@ import com.mycompany.data.ServiceResponse;
 abstract public class AbstractService {
 	
 	@Value("${microservicesMode}") private boolean microservicesMode;
+	
+	private static final Logger logger = LoggerFactory.getLogger(AbstractService.class);
 
 	public ServiceResponse process(ServiceRequest request, int fibonacci, int responseSize) {
 		String serviceName = this.getClass().getSimpleName();
+		
+		logger.debug("{}.process started. Request: {}", serviceName, request);
 		
 		ServiceResponse response = new ServiceResponse();
 		
@@ -48,6 +54,8 @@ abstract public class AbstractService {
 		
 		// Some processing
 		Fibonacci.calculate(fibonacci); 
+		
+		logger.debug("{}.process completed", serviceName);
 		
 		return response;
 	}

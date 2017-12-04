@@ -17,10 +17,16 @@ spring:
   
 microservicesMode: true
 
+ServiceA:
+  ribbon:
+    listOfServers: service-a:8080
 ServiceB:
   ribbon:
-    listOfServers: mycompany-serviceB:8080
+    listOfServers: service-b:8080
+ServiceC:
+  ribbon:
+    listOfServers: service-c:8080
 ServiceD:
   ribbon:
-    listOfServers: mycompany-serviceD:8080
+    listOfServers: service-d:8080
  
