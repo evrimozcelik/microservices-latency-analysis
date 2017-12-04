@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: monolithapp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: monolithapp
+    spec:
+      containers:
+        - name: monolithapp
+          image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "500m"
+            limits:
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monolith-service
+  labels:
+    run: monolithapp
+spec:
+  type: NodePort
+  selector:
+    run: monolithapp
+  ports:
+   - name: "service"
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+     nodePort: 30080

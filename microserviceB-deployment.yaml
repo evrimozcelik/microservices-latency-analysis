@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: microserviceapp-b
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: microserviceapp-b
+    spec:
+      containers:
+        - name: microserviceapp-b
+          image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          args:
+            - '-Dspring.profiles.active=microservices'
+          resources:
+            requests:
+              cpu: "250m"
+            limits:
+              cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-b
+  labels:
+    run: microserviceapp-b
+spec:
+  type: NodePort
+  selector:
+    run: microserviceapp-b
+  ports:
+   - name: "service"
+     protocol: TCP
+     port: 8080
+     targetPort: 8080
+     nodePort: 30082
