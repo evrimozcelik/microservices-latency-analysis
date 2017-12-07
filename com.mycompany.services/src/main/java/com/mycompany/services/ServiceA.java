@@ -24,9 +24,19 @@ public class ServiceA extends AbstractService{
 	
 	@PostMapping("/ServiceA")
 	public ServiceResponse doService(@RequestBody ServiceRequest request) {
-		logger.info("ServiceA started, calling Service B");
+		logger.info("ServiceA started");
+		
+		long startTime = System.currentTimeMillis();
+		
 		callServiceB(request);
-		return process(request, fibonacci, responseSize);
+		long serviceB_elapasedTime = System.currentTimeMillis() - startTime;
+		
+		ServiceResponse response = process(request, fibonacci, responseSize);
+		long elapsedTime = System.currentTimeMillis() - startTime;
+		
+		logger.info("ServiceA total elapsed time: {} ms. ServiceA->ServiceB call elapsed time: {} ms. @{}/{}", elapsedTime, serviceB_elapasedTime, elapsedTime, serviceB_elapasedTime);
+		
+		return response;
 	}
 	
 	private void callServiceB(ServiceRequest request) {

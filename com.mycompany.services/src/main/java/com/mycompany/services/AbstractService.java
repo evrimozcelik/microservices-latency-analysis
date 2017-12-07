@@ -1,7 +1,6 @@
 package com.mycompany.services;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +17,7 @@ abstract public class AbstractService {
 	@Value("${microservicesMode}") private boolean microservicesMode;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AbstractService.class);
+	private static String value = "855bfbac-60fb-4407-aeb1-bf668a182135";
 
 	public ServiceResponse process(ServiceRequest request, int fibonacci, int responseSize) {
 		String serviceName = this.getClass().getSimpleName();
@@ -45,10 +45,14 @@ abstract public class AbstractService {
 		
 		response.setItems(new ArrayList<>());
 		
+		ResponseItem item = new ResponseItem();
+		item.setValue("Time: " + System.currentTimeMillis());
+		response.getItems().add(item);
+		
 		// Generate Payload
-		for(int i=0; i<responseSize; i++) {
-			ResponseItem item = new ResponseItem();
-			item.setValue(UUID.randomUUID().toString());
+		for(int i=1; i<responseSize; i++) {
+			item = new ResponseItem();
+			item.setValue(value);
 			response.getItems().add(item);
 		}
 		
@@ -64,4 +68,5 @@ abstract public class AbstractService {
 		return microservicesMode;
 	}
 	
+
 }

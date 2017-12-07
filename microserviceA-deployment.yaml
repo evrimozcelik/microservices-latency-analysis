@@ -17,11 +17,7 @@ spec:
             - containerPort: 8080
           args:
             - '-Dspring.profiles.active=microservices'
-          resources:
-            requests:
-              cpu: "250m"
-            limits:
-              cpu: "250m"
+
 ---
 apiVersion: v1
 kind: Service

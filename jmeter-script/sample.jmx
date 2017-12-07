@@ -22,19 +22,19 @@
   &quot;serviceConfig&quot;: {&#xd;
     &quot;ServiceA&quot;: {&#xd;
       &quot;fibonacci&quot;: 34,&#xd;
-      &quot;responseSize&quot;: 1&#xd;
+      &quot;responseSize&quot;: 100&#xd;
     },&#xd;
     &quot;ServiceB&quot;: {&#xd;
       &quot;fibonacci&quot;: 34,&#xd;
-      &quot;responseSize&quot;: 1&#xd;
+      &quot;responseSize&quot;: 100&#xd;
     },&#xd;
     &quot;ServiceC&quot;: {&#xd;
       &quot;fibonacci&quot;: 34,&#xd;
-      &quot;responseSize&quot;: 1&#xd;
+      &quot;responseSize&quot;: 100&#xd;
     },&#xd;
     &quot;ServiceD&quot;: {&#xd;
       &quot;fibonacci&quot;: 34,&#xd;
-      &quot;responseSize&quot;: 1&#xd;
+      &quot;responseSize&quot;: 100&#xd;
     }&#xd;
   }&#xd;
 }</stringProp>
@@ -270,8 +270,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
         <longProp name="ThreadGroup.start_time">1479900325000</longProp>
         <longProp name="ThreadGroup.end_time">1542972325000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
@@ -327,8 +327,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">4</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">6</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
         <longProp name="ThreadGroup.start_time">1479900325000</longProp>
         <longProp name="ThreadGroup.end_time">1542972325000</longProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>

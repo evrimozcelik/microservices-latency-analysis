@@ -19,7 +19,14 @@ public class ServiceB extends AbstractService{
 	
 	@PostMapping("/ServiceB")
 	public ServiceResponse doService(@RequestBody ServiceRequest request) {
+		long startTime = System.currentTimeMillis();
+		
 		logger.info("ServiceB started");
-		return process(request, fibonacci, responseSize);
+		ServiceResponse response = process(request, fibonacci, responseSize);
+		
+		long elapsedTime = System.currentTimeMillis() - startTime;
+		logger.info("ServiceB total elapsed time: {} ms. @{}", elapsedTime, elapsedTime);
+		
+		return response;
 	}
 }
