@@ -8,8 +8,7 @@ ENV	JMETER_BIN	${JMETER_HOME}/bin
 ENV	JMETER_DOWNLOAD_URL  http://www-us.apache.org/dist//jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
 
 # Install extra packages
-# See https://github.com/gliderlabs/docker-alpine/issues/136#issuecomment-272703023
-# Change TimeZone TODO: TZ still is not set!
+# Change TimeZone 
 ARG TZ="Europe/Istanbul"
 RUN apk update
 RUN apk upgrade
