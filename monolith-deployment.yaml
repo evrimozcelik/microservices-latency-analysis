@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: monolithapp
-          image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services
+          image: registry.eu-gb.bluemix.net/evrim/com.mycompany.services # replace with your docker image name
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

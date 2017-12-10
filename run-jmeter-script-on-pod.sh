@@ -12,7 +12,7 @@ kubectl exec -it ${SERVICE_B_POD_NAME}  -- bash -c "cat /dev/null > /tmp/Service
 
 # Finally run
 kubectl exec -it ${JMETER_POD_NAME}  -- rm -rf /tmp/jmeter-report
-kubectl cp ../jmeter-script ${JMETER_POD_NAME}:/tmp/jmeter-script
+kubectl cp ./jmeter-script ${JMETER_POD_NAME}:/tmp/jmeter-script
 kubectl exec -it ${JMETER_POD_NAME}  -- ./bin/jmeter.sh -n -t /tmp/jmeter-script/sample.jmx
 rm -rf /tmp/jmeter-report
 kubectl cp ${JMETER_POD_NAME}:/tmp/jmeter-report /tmp/jmeter-report
