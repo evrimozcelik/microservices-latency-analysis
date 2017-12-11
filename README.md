@@ -20,6 +20,8 @@ On the other hand as a nature of distributed environment there are some challeng
 
 With this code you can build a simulation environment to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB with the same interface. To simulate CPU consumption, both services calculate a fibonacci based on input parameter and ServiceA additionally calls ServiceB after the calculation. Both services return a response message and the size of the message can again be set in the input parameter.
 
+![monolith-app](images/monolith-app.png)
+
 ## Prerequisite
 
 Create a Kubernetes cluster with either [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube) for local testing, or with [IBM Bluemix Container Service](https://github.com/IBM/container-journey-template) to deploy in cloud.
