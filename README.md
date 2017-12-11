@@ -20,7 +20,7 @@ On the other hand as a nature of distributed environment there are some challeng
 
 With this code you can build a **simulation environment** to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB using the same interface (input: com.mycompany.data.ServiceRequest, output: com.mycompany.data.ServiceResponse). You can tune the services' CPU consuption and response message size using ServiceConfig in the request message. To simulate the CPU consumption, both services calculate a fibonacci based on input parameter (ServiceConfig) and ServiceA additionally calls ServiceB after the calculation. Both services return a response message and the size of the message can be set in the input parameter.
 
-The following diagram shows how monolith application works on Kubernetes. You can use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port.
+The following diagram shows how monolith application works on Kubernetes. You can use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port. 
 
 ![monolith-arch](images/monolith-arch.png)
 
@@ -80,12 +80,12 @@ Please follow the steps below to install the sample application into your Bluemi
 ## Steps
 1. [Prepare Bluemix Kubernetes cluster](#1-prepare-bluemix-kubernetes-cluster)  
 2. [Create the Docker Image](#2-create-the-docker-image)  
-2.1 [Build com.mycompany.services Project using Maven](#21-build-project-using-maven)  
+2.1 [Build Project using Maven](#21-build-project-using-maven)  
 2.2 [Build and Push Docker Images](#22-build-docker-image-for-the-application)
-3 [Deploy the Application](#3-deploy-the-application)
+3. [Deploy the Application](#3-deploy-the-application)
 3.1 [Deploy the Application as Monolith](#31-deploy-the-application-as-monolith)
 3.1 [Deploy the Application as Microservices](#32-deploy-the-application-as-microservices)
-4. Generate load
+4. [Generate load](#4-generate-load)
 
 # 1. Prepare Bluemix Kubernetes cluster
 Follow the instructions in [Getting Started](https://console.bluemix.net/containers-kubernetes/home/registryGettingStarted) to setup required tools and Bluemix Kubernetes cluster.
@@ -127,9 +127,9 @@ $ kubectl create -f microserviceB-deployment.yaml
 ```
 
 # 4. Generate Load
-You can generate load externally (out of Kubernetes system) or internally using your best load generation tool. If you prefer to use Jmeter you can use the **jmeter-script/sample.jmx** and if you want to generate the load within Kubernetes system you may want to check out [kubernetes-jmeter](https://github.com/evrimozcelik/kubernetes-jmeter) and use **run-jmeter-script-on-pod.sh** bash script to run the Jmeter script and collect performance logs.
+You can generate load externally (out of Kubernetes system) or internally using your best load generation tool. If you prefer to use Jmeter you can use the **jmeter-script/sample.jmx** and if you want to generate the load within Kubernetes system you may want to deploy  [kubernetes-jmeter](https://github.com/evrimozcelik/kubernetes-jmeter) to your Kubernetes environment and use **run-jmeter-script-on-pod.sh** bash script to run the Jmeter script and collect performance logs.
 
->Note: please modify run-jmeter-script-on-pod.sh before running it.
+Please modify run-jmeter-script-on-pod.sh before running it.
 
 ```bash
 JMETER_POD_NAME="jmeter-2150202267-g1vbh" # replace with your Jmeter Pod name
