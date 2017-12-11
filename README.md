@@ -127,7 +127,15 @@ $ kubectl create -f microserviceB-deployment.yaml
 ```
 
 # 4. Generate Load
-You can generate load externally (out of Kubernetes system) or internally using your best load generation tool. If you prefer to use Jmeter you can use the jmeter-script/sample.jmx and if you want to generate the load within Kubernetes system you may want to check out [kubernetes-jmeter](https://github.com/evrimozcelik/kubernetes-jmeter) and use run-jmeter-script-on-pod.sh bash script to run the Jmeter script and collect performance logs.
+You can generate load externally (out of Kubernetes system) or internally using your best load generation tool. If you prefer to use Jmeter you can use the **jmeter-script/sample.jmx** and if you want to generate the load within Kubernetes system you may want to check out [kubernetes-jmeter](https://github.com/evrimozcelik/kubernetes-jmeter) and use **run-jmeter-script-on-pod.sh** bash script to run the Jmeter script and collect performance logs.
+
+>Note: please modify run-jmeter-script-on-pod.sh before running it.
+
+```bash
+JMETER_POD_NAME="jmeter-2150202267-g1vbh" # replace with your Jmeter Pod name
+SERVICE_A_POD_NAME="microserviceapp-a-2063030179-zcvx6" # replace with your ServiceA Pod name
+SERVICE_B_POD_NAME="microserviceapp-b-606931349-qmvf4" # replace with your ServiceB Pod name, if running as monolith that should be same as SERVICE_A_POD_NAME
+```
 
 Note that application writes performance logs (e.g. ServiceA writes to file /tmp/ServiceA.log) to the log file in the Container's /tmp folder and those logs can be investigated for further analysis.
 

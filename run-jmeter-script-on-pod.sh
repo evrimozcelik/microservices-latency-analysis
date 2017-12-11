@@ -2,9 +2,9 @@
 #
 # Run JMeter script on Jmeter POD
 
-JMETER_POD_NAME="jmeter-2150202267-g1vbh"
-SERVICE_A_POD_NAME="microserviceapp-a-2063030179-zcvx6"
-SERVICE_B_POD_NAME="microserviceapp-b-606931349-qmvf4"
+JMETER_POD_NAME="jmeter-2150202267-g1vbh" # replace with your Jmeter Pod name
+SERVICE_A_POD_NAME="microserviceapp-a-2063030179-zcvx6" # replace with your ServiceA Pod name
+SERVICE_B_POD_NAME="microserviceapp-b-606931349-qmvf4" # replace with your ServiceB Pod name, if running as monolith that should be same as SERVICE_A_POD_NAME
 
 # Prepare service
 kubectl exec -it ${SERVICE_A_POD_NAME}  -- bash -c "cat /dev/null > /tmp/ServiceA.log"
