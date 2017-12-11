@@ -18,11 +18,58 @@ On the other hand as a nature of distributed environment there are some challeng
 - Applications and data should be refactored into Microservices properly
 - Remote calls will introduce latency and slow response times
 
-With this code you can build a simulation environment to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB with the same interface. To simulate CPU consumption, both services calculate a fibonacci based on input parameter and ServiceA additionally calls ServiceB after the calculation. Both services return a response message and the size of the message can again be set in the input parameter.
+With this code you can build a simulation environment to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB using the same interface (input: com.mycompany.data.ServiceRequest, output: com.mycompany.data.ServiceResponse). You can tune the services' CPU consuption and response message size using ServiceConfig in the request message. To simulate the CPU consumption, both services calculate a fibonacci based on input parameter (ServiceConfig) and ServiceA additionally calls ServiceB after this calculation. Both services return a response message and the size of the message can be set in the input parameter.
 
-![monolith-app](images/monolith-app.png)
+The following diagram shows how monolith application works on Kubernetes. You need to use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port.
 
-## Prerequisite
+![monolith-arch](images/monolith-arch.png)
+
+The following diagram shows how Microservices applications work on Kubernetes. You need to use **microserviceA-deployment.yaml** and **microserviceB-deployment.yaml** to generate this structure.
+
+![microservices-arch](images/microservices-arch.png)
+
+The following shows sample ServiceRequest:
+```xml
+{
+  "reqId": "request1",
+  "serviceConfig": {
+    "ServiceA": {
+      "fibonacci": 34,
+      "responseSize": 5
+    },
+    "ServiceB": {
+      "fibonacci": 36,
+      "responseSize": 10
+    }
+  }
+}
+```
+
+The following shows sample ServiceResponse:
+```xml
+{
+  "reqId": "request1",
+  "items": [
+    {
+      "value": "Time: 1512657114556"
+    },
+    {
+      "value": "855bfbac-60fb-4407-aeb1-bf668a182135"
+    },
+    {
+      "value": "855bfbac-60fb-4407-aeb1-bf668a182135"
+    },
+    {
+      "value": "855bfbac-60fb-4407-aeb1-bf668a182135"
+    },
+    {
+      "value": "855bfbac-60fb-4407-aeb1-bf668a182135"
+    }
+  ]
+}
+```
+
+## Prerequisites for Setup
 
 Create a Kubernetes cluster with either [Minikube](https://kubernetes.io/docs/getting-started-guides/minikube) for local testing, or with [IBM Bluemix Container Service](https://github.com/IBM/container-journey-template) to deploy in cloud.
 
