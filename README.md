@@ -1,6 +1,6 @@
 # Microservices Latency Analysis
 
-Microservices is a new architectural style to develop autonomous and distributed services and each service does one thing and does it well. Microservices provide lightweight protocols (like REST, Message Queue) and communicate with each other over those protocols and are very resilient for changing loads and failures. Microservices is often confused with SOA where SOA's main focus is on providing coarse grained services on the other hand Microservices' focus is on developing autonomous and distributed services and providing fine grained services.
+Microservices is a new architectural style to develop autonomous and distributed services and each service does one thing and does it well. Microservices provide lightweight protocols (like REST, Message Queue) and communicate with each other over those protocols and are very resilient for changing loads and failures. Microservices is often confused with SOA where SOA's main focus is to provide coarse grained services on the other hand Microservices' focus is to develop autonomous and distributed services and providing fine grained services.
 
 Microservices introduce many advantages such as:
 - Applications become simple and easy to implement, consume and maintain
@@ -18,13 +18,13 @@ On the other hand as a nature of distributed environment there are some challeng
 - Applications and data should be refactored into Microservices properly
 - Remote calls will introduce latency and slow response times
 
-With this code you can build a simulation environment to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB using the same interface (input: com.mycompany.data.ServiceRequest, output: com.mycompany.data.ServiceResponse). You can tune the services' CPU consuption and response message size using ServiceConfig in the request message. To simulate the CPU consumption, both services calculate a fibonacci based on input parameter (ServiceConfig) and ServiceA additionally calls ServiceB after this calculation. Both services return a response message and the size of the message can be set in the input parameter.
+With this code you can build a **simulation environment** to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB using the same interface (input: com.mycompany.data.ServiceRequest, output: com.mycompany.data.ServiceResponse). You can tune the services' CPU consuption and response message size using ServiceConfig in the request message. To simulate the CPU consumption, both services calculate a fibonacci based on input parameter (ServiceConfig) and ServiceA additionally calls ServiceB after the calculation. Both services return a response message and the size of the message can be set in the input parameter.
 
-The following diagram shows how monolith application works on Kubernetes. You need to use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port.
+The following diagram shows how monolith application works on Kubernetes. You can use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port.
 
 ![monolith-arch](images/monolith-arch.png)
 
-The following diagram shows how Microservices applications work on Kubernetes. You need to use **microserviceA-deployment.yaml** and **microserviceB-deployment.yaml** to generate this structure.
+The following diagram shows how Microservices applications work on Kubernetes. You can use **microserviceA-deployment.yaml** and **microserviceB-deployment.yaml** to generate this structure.
 
 ![microservices-arch](images/microservices-arch.png)
 
@@ -75,23 +75,24 @@ Create a Kubernetes cluster with either [Minikube](https://kubernetes.io/docs/ge
 
 You will need to create your Kubernetes cluster first and make sure it is fully deployed in your Bluemix account.
 
-Please follow the steps below to install the sample application into your Bluemix Kubernetes cluster.
+Please follow the steps below to install the sample application into your Bluemix Kubernetes cluster and generate load.
 
 ## Steps
 1. [Prepare Bluemix Kubernetes cluster](#1-prepare-bluemix-kubernetes-cluster)  
 2. [Create the Docker Image](#2-create-the-docker-image)  
 2.1 [Build com.mycompany.services Project using Maven](#21-build-project-using-maven)  
-2.2 [Build and Push Docker Images](#22-build-docker-image-for-app)
-3 [Deploy the Application](#3-deploy-the-app)  
-3.1 [Deploy the Application as Monolith](#31-deploy-the-app-as-monolith)
-3.1 [Deploy the Application as Microservices](#32-deploy-the-app-as-microservices)
+2.2 [Build and Push Docker Images](#22-build-docker-image-for-the-application)
+3 [Deploy the Application](#3-deploy-the-application)
+3.1 [Deploy the Application as Monolith](#31-deploy-the-application-as-monolith)
+3.1 [Deploy the Application as Microservices](#32-deploy-the-application-as-microservices)
+4. Generate load
 
 # 1. Prepare Bluemix Kubernetes cluster
-Follow the instructions in [Getting Started] (https://console.bluemix.net/containers-kubernetes/home/registryGettingStarted) to setup required tools and Bluemix Kubernetes cluster.
+Follow the instructions in [Getting Started](https://console.bluemix.net/containers-kubernetes/home/registryGettingStarted) to setup required tools and Bluemix Kubernetes cluster.
 
 # 2. Create the Docker Image
 
-## 2.1 Build com.mycompany.services project using Maven
+## 2.1 Build project using Maven
 First build the java project with Maven and then build the Docker image using the provided **Dockerfile** in the project folder.
 
 ```bash
@@ -111,11 +112,7 @@ $ docker push registry.eu-gb.bluemix.net/<namespace>/com.mycompany.services
 The application can be deployed as monolith or microservices with the use of JVM parameter spring active profile.
 
 ## 3.1 Deploy the Application as Monolith
-Default spring profile works as monolith application.
-
-
-## 3.1 Deploy the Application as Monolith
-In order to make the application work as monolith application, please run it with no spring active profile parameter. The following yaml file takes care of this.
+Default spring profile works as monolith application. In order to make the application work as monolith application, please run it with no spring active profile parameter. The following yaml file takes care of this.
 
 ```bash
 $ kubectl create -f monolith-deployment.yaml
@@ -127,4 +124,24 @@ In order to make the application work as Microservices application, please run i
 ```bash
 $ kubectl create -f microserviceA-deployment.yaml
 $ kubectl create -f microserviceB-deployment.yaml
+```
+
+# 4. Generate Load
+You can generate load externally (out of Kubernetes system) or internally using your best load generation tool. If you prefer to use Jmeter you can use the jmeter-script/sample.jmx and if you want to generate the load within Kubernetes system you may want to check out [kubernetes-jmeter](https://github.com/evrimozcelik/kubernetes-jmeter) and use run-jmeter-script-on-pod.sh bash script to run the Jmeter script and collect performance logs.
+
+Note that application writes performance logs (e.g. ServiceA writes to file /tmp/ServiceA.log) to the log file in the Container's /tmp folder and those logs can be investigated for further analysis.
+
+Sample ServiceA.log
+
+```text
+14:47:46.523 [http-nio-8080-exec-10] INFO  com.mycompany.services.ServiceA - ServiceA started
+14:47:46.523 [http-nio-8080-exec-10] INFO  com.mycompany.services.ServiceA - Calling ServiceB as microservice
+14:47:46.524 [http-nio-8080-exec-6] INFO  com.mycompany.services.ServiceA - ServiceA started
+14:47:46.524 [http-nio-8080-exec-6] INFO  com.mycompany.services.ServiceA - Calling ServiceB as microservice
+14:47:46.628 [http-nio-8080-exec-6] INFO  com.mycompany.services.ServiceA - ServiceA total elapsed time: 104 ms. ServiceA->ServiceB call elapsed time: 52 ms. @104/52
+14:47:46.648 [http-nio-8080-exec-10] INFO  com.mycompany.services.ServiceA - ServiceA total elapsed time: 125 ms. ServiceA->ServiceB call elapsed time: 58 ms. @125/58
+14:47:46.817 [http-nio-8080-exec-7] INFO  com.mycompany.services.ServiceA - ServiceA started
+14:47:46.817 [http-nio-8080-exec-7] INFO  com.mycompany.services.ServiceA - Calling ServiceB as microservice
+14:47:46.921 [http-nio-8080-exec-7] INFO  com.mycompany.services.ServiceA - ServiceA total elapsed time: 104 ms. ServiceA->ServiceB call elapsed time: 59 ms. @104/59
+14:47:47.020 [http-nio-8080-exec-4] INFO  com.mycompany.services.ServiceA - ServiceA started
 ```
