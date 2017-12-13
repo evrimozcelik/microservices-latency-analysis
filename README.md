@@ -1,26 +1,10 @@
 # Microservices Latency Analysis
 
-Microservices is a new architectural style to develop autonomous and distributed services and each service does one thing and does it well. Microservices provide lightweight protocols (like REST, Message Queue) and communicate with each other over those protocols and are very resilient for changing loads and failures. Microservices is often confused with SOA where SOA's main focus is to provide coarse grained services on the other hand Microservices' focus is to develop autonomous and distributed services and providing fine grained services.
-
-Microservices introduce many advantages such as:
-- Applications become simple and easy to implement, consume and maintain
-- Applications can be developed by autonomous teams by using suitable platform (Java, .Net, Node.js, etc) and technology (NoSQL, Relational Database, etc)
-- Release cycles can be decided independently by the team
-- Releases can be more frequent which helps to provide end user demands in a short period of time
-- Applications can be scaled easily
-
-On the other hand as a nature of distributed environment there are some challenges that need to be addressed carefully:
-- There should be mature DevOps practice in the organization
-- Runtime environments should be provisioned very quickly
-- Automation is required in test, build and deployment
-- Applications should be designed to work in distributed environments
-- Applications should be resilient for changing loads and failures
-- Applications and data should be refactored into Microservices properly
-- Remote calls will introduce latency and slow response times
+Microservice is an architectural style to develop autonomous and distributed services and it's motto clearly defines that each service does one thing and does it well. Microservices expose their well-defined services over lightweight protocols (like REST, Message Queue), communicate with each other over those protocols and they are very resilient for changing loads and failures. Microservices are often confused with SOA where SOA's main focus is integrations and to provide coarse grained services on the other hand Microservices' focus is to develop autonomous and distributed applications and providing fine grained services.
 
 With this code you can build a **simulation environment** to investigate the effect of latency after splitting the monolith application into Microservices. The sample application com.mycompany.services was developed with Spring Cloud and can be deployed to Kubernetes as a monolith application or microservices. The application exposes 2 services ServiceA and ServiceB using the same interface (input: com.mycompany.data.ServiceRequest, output: com.mycompany.data.ServiceResponse). You can tune the services' CPU consuption and response message size using ServiceConfig in the request message. To simulate the CPU consumption, both services calculate a fibonacci based on input parameter (ServiceConfig) and ServiceA additionally calls ServiceB after the calculation. Both services return a response message and the size of the message can be set in the input parameter.
 
-The following diagram shows how monolith application works on Kubernetes. You can use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port. 
+The following diagram shows how monolith application works on Kubernetes. You can use **monolith-deployment.yaml** to generate this structure. Load can be generated externally (out of Kubenetes system) or internally. If load is generated externally then the target endpoint should be constructed using Worker Node's public IP and Service's NodePort port. If the load is generated internally then the target endpoint should be constructed using Service's name (e.g. "monolith-service")s and Service's port.
 
 ![monolith-arch](images/monolith-arch.png)
 
