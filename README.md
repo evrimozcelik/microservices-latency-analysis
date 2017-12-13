@@ -68,7 +68,7 @@ Please follow the steps below to install the sample application into your Bluemi
 2.2 [Build and Push Docker Images](#22-build-docker-image-for-the-application)
 3. [Deploy the Application](#3-deploy-the-application)
 3.1 [Deploy the Application as Monolith](#31-deploy-the-application-as-monolith)
-3.1 [Deploy the Application as Microservices](#32-deploy-the-application-as-microservices)
+3.2 [Deploy the Application as Microservices](#32-deploy-the-application-as-microservices)
 4. [Generate load](#4-generate-load)
 
 # 1. Prepare Bluemix Kubernetes cluster
